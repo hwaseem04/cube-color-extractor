@@ -38,21 +38,13 @@ def draw_small_cube(count, frame, mean_clr):
     if len(small_cube_color_maps[0]) != 0:
 
         for cube_index in range(0, (count+1)):
-            if (len(small_cube_color_maps[cube_index]) != 9):
-                i = 1
-            else:
-                i = 0
             try:
                 cv2.rectangle(frame, (p1[0], p1[1]) , (p5[0] + 80, p2[1] + 80)  ,small_cube_color_maps[cube_index][0],-1) 
                 cv2.rectangle(frame, (p2[0], p2[1]) , (p5[0] + 160, p3[1] + 80)  ,small_cube_color_maps[cube_index][1],-1)
                 cv2.rectangle(frame, (p3[0], p3[1]) , (p6[0]      , p6[1])       ,small_cube_color_maps[cube_index][2],-1) 
 
                 cv2.rectangle(frame, (p5[0], p5[1]) , (p7[0] + 80, p7[1])  ,small_cube_color_maps[cube_index][3],-1)
-                # Cube[2][2] non detected due to chinese sticker
-                if i == 1:
-                    cv2.rectangle(frame, (p5[0] + 80, p5[1]) , (p7[0] + 160, p7[1])  ,(255,255,255),-1)
-                else:
-                    cv2.rectangle(frame, (p5[0] + 80, p5[1]) , (p7[0] + 160, p7[1])  ,small_cube_color_maps[cube_index][4],-1)
+                cv2.rectangle(frame, (p5[0] + 80, p5[1]) , (p7[0] + 160, p7[1])  ,small_cube_color_maps[cube_index][4],-1)
                 cv2.rectangle(frame, (p5[0] + 160, p5[1]) , (p8[0], p8[1])  ,small_cube_color_maps[cube_index][5-i],-1) 
 
                 cv2.rectangle(frame, (p7[0], p7[1]) , (p10[0], p10[1])  ,small_cube_color_maps[cube_index][6-i],-1)
@@ -117,55 +109,6 @@ while 1:
             print(rec[1][0] * rec[1][1])
             RR.append(rec)
     
-    # TO draw box around cube
-    if len(RR) >= 9:
-        #print(RR)
-        y_sorted = sorted(RR, key=key_y)
-        subarray = [y_sorted[:3], y_sorted[3:6], y_sorted[6:9]]
-        for i in range(len(subarray)):
-            subarray[i] = sorted(subarray[i], key=key_x)  
-
-        Top_left = subarray[0][0]
-        Top_right = subarray[0][2]
-        Bottom_left = subarray[2][0]
-        Bottom_Right = subarray[2][2]
-        
-        box1 = cv2.boxPoints(Top_left)
-        box1 = np.int0(box1)
-        if box1[2][0] < box1[3][0]:
-            Top_left = (box1[2]) 
-        else:
-            Top_left = (box1[3]) 
-        
-        box1 = cv2.boxPoints(Top_right)
-        box1 = np.int0(box1)
-        if box1[2][0] > box1[3][0]:
-            Top_right = (box1[2]) 
-        else:
-            Top_right = (box1[3])
-
-        box1 = cv2.boxPoints(Bottom_left)
-        box1 = np.int0(box1)
-        if box1[0][0] < box1[1][0]:
-            Bottom_left = (box1[0]) 
-        else:
-            Bottom_left = (box1[1])
-        
-        box1 = cv2.boxPoints(Bottom_Right)
-        box1 = np.int0(box1)
-        if box1[0][0] > box1[1][0]:
-            Bottom_Right = (box1[0]) 
-        else:
-            Bottom_Right = (box1[1])
-        
-        #print(Top_left)
-        #print(Top_right)
-        #cv2.line(frame,(int(Top_left[0]), int(Top_left[1])),(int(Top_right[0]), int(Top_right[1])),(255,0,0),15)
-        #cv2.line(frame,(int(Top_right[0]), int(Top_right[1])),(int(Bottom_Right[0]),int(Bottom_Right[1])),(255,0,0),15)
-        #cv2.line(frame,(int(Bottom_Right[0]),int(Bottom_Right[1])),(int(Bottom_left[0]), int(Bottom_left[1])),(255,0,0),15)
-        #cv2.line(frame,(int(Bottom_left[0]), int(Bottom_left[1])), (int(Top_left[0]), int(Top_left[1])),(255,0,0),15)
-            
-        #cv2.waitKey()
     mean_clr = []
     if len(RR) < 9:
         subarray = [RR]
