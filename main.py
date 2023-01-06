@@ -204,7 +204,8 @@ while 1:
     concat1 = np.concatenate((edges, dilation))
 
     cv2.imshow("Main frame", frame)
-
+    #cv2.imshow("Mask", frame3)
+    
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
     if cv2.waitKey(60) & 0xFF == ord('e'):
