@@ -1,5 +1,5 @@
 # Cube-color-extractor
-Pet project to extract rubiks cube color using OpenCV. Working [demo]() in youtube.
+Pet project to extract rubiks cube color using OpenCV. Working [demo](https://youtu.be/lPK9oIrQoyA) in youtube.
 
 ## File structure and Overview
 - `main.py` - This is the main file that reads video frames and detect cube faces. The following operations are performed in this file:
@@ -22,7 +22,7 @@ Pet project to extract rubiks cube color using OpenCV. Working [demo]() in youtu
 - Press `e` to capture and draw its face colors.
 - After capturing 6 faces, press `e` again to recapture from beginning.
 - Press `q` to quit.
-- For more clarity, watch this [demo]().
+- For more clarity, watch this [demo](https://youtu.be/lPK9oIrQoyA).
 
 ## Future directions
 - Use the captured 6 faces to generate a 3D model of cube.
